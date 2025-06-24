@@ -18,7 +18,10 @@
     "customNumber": "Benutzerdefinierte Anzahl",
     "generateQuiz": "Quiz generieren",
     "generating": "Wird generiert...",
-    "exportExcel": "Nach Excel exportieren"
+    "exportExcel": "Nach Excel exportieren",
+    "useHistory": "Kontext vorheriger Fragen verwenden",
+    "clearHistory": "Verlauf löschen",
+    "contextActive": "Kontext aktiv"
   },
   "results": {
     "quizGenerated": "Generiertes Quiz",

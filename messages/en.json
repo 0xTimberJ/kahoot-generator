@@ -18,7 +18,10 @@
     "customNumber": "Custom number",
     "generateQuiz": "Generate Quiz",
     "generating": "Generating...",
-    "exportExcel": "Export to Excel"
+    "exportExcel": "Export to Excel",
+    "useHistory": "Use context from previous questions",
+    "clearHistory": "Clear history",
+    "contextActive": "Context active"
   },
   "results": {
     "quizGenerated": "Generated Quiz",

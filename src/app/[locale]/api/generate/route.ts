@@ -21,6 +21,14 @@ export async function POST(req: Request) {
     - Only one correct answer per question except if in the question the user ask for multiple answers
     - Vary response times according to difficulty
     - Incorrect answers must be plausible
+
+    SPECIAL CASE - ADD MORE QUESTIONS:
+    When input contains keywords like "ajoute", "rajoute", "add", "more", "encore", "plus":
+    - Extract the topic from the previous questions context (ignore the add request text)
+    - Generate ONLY the requested number of NEW questions on that same topic  
+    - Make them complementary to existing questions (different aspects, harder/easier)
+    - Never duplicate existing questions
+    - Return ONLY the new questions, not the previous ones
     
     Required JSON format:
     [

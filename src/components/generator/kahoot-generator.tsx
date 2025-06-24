@@ -1,6 +1,7 @@
 "use client";
 
-import useKahootGenerator from "./kahoot-generator.logic";
+import { useQuestionsStore } from "@/stores/questions.store";
+import { useLocale } from "next-intl";
 import QuizForm from "./quiz-form";
 import QuizQuestionCard from "./quiz-question-card";
 import {
@@ -11,33 +12,12 @@ import {
 import QuizStats from "./quiz-stats";
 
 export default function KahootGenerator() {
-  const {
-    locale,
-    topic,
-    setTopic,
-    numberOfQuestions,
-    setNumberOfQuestions,
-    customNumber,
-    setCustomNumber,
-    questions,
-    isLoading,
-    error,
-    generateQuiz,
-  } = useKahootGenerator();
+  const locale = useLocale();
+  const { isLoading, error, questions } = useQuestionsStore();
 
   return (
     <div className="flex flex-col items-center justify-center gap-8">
-      <QuizForm
-        topic={topic}
-        setTopic={setTopic}
-        numberOfQuestions={numberOfQuestions}
-        setNumberOfQuestions={setNumberOfQuestions}
-        customNumber={customNumber}
-        setCustomNumber={setCustomNumber}
-        isLoading={isLoading}
-        onGenerate={generateQuiz}
-        questions={questions}
-      />
+      <QuizForm />
 
       {/* Loading State */}
       {isLoading && <QuizLoadingState />}

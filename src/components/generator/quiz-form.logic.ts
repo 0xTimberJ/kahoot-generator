@@ -1,8 +1,8 @@
 "use client";
 
 import { GenerateQuizParams, QuizQuestion } from "@/lib/types";
+import { useQuestionsStore } from "@/stores/questions.store";
 import { useLocale } from "next-intl";
-import { useState } from "react";
 
 const languageMap: Record<string, string> = {
   en: "English",
@@ -13,10 +13,13 @@ const languageMap: Record<string, string> = {
 };
 
 // Generate quiz function
-const generateQuizData = async (url: string, params: GenerateQuizParams) => {
+const generateQuizData = async (
+  url: string,
+  params: GenerateQuizParams & { questionsHistory?: QuizQuestion[] }
+) => {
   const questionsCount = params.numberOfQuestions;
 
-  const prompt = `Analyze the input and determine if it contains:
+  let prompt = `Analyze the input and determine if it contains:
 1) A simple topic/subject to generate questions about
 2) Pre-formatted questions in tabular format that need to be converted to JSON
 
@@ -24,7 +27,22 @@ Input: "${params.topic}"
 
 TARGET: ${questionsCount} questions in ${
     languageMap[params.locale] || "English"
+  }`;
+
+  // Add context if history is provided
+  if (params.questionsHistory && params.questionsHistory.length > 0) {
+    prompt += `
+
+CONTEXT - Previous questions generated:
+${JSON.stringify(params.questionsHistory, null, 2)}
+
+Take into account these previous questions to:
+- Avoid duplicating exact same questions
+- Maintain consistent difficulty level and style
+- Generate complementary questions on the same topic`;
   }
+
+  prompt += `
 
 IF INPUT IS A SIMPLE TOPIC:
 Generate ${questionsCount} quiz questions about the topic.
@@ -75,15 +93,20 @@ Convert the existing questions to JSON format. If there are fewer than ${questio
   }
 };
 
-export default function useKahootGenerator() {
+export default function useQuizForm() {
   const locale = useLocale();
 
-  const [topic, setTopic] = useState("");
-  const [numberOfQuestions, setNumberOfQuestions] = useState("5");
-  const [customNumber, setCustomNumber] = useState("");
-  const [questions, setQuestions] = useState<QuizQuestion[] | null>(null);
-  const [error, setError] = useState<Error | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const {
+    topic,
+    numberOfQuestions,
+    customNumber,
+    questionsHistory,
+    useHistory,
+    setQuestions,
+    setQuestionsHistory,
+    setIsLoading,
+    setError,
+  } = useQuestionsStore();
 
   const generateQuiz = async () => {
     if (!topic.trim()) return;
@@ -100,8 +123,14 @@ export default function useKahootGenerator() {
         topic,
         numberOfQuestions: questionsCount,
         locale,
+        questionsHistory: useHistory ? questionsHistory : undefined,
       });
       setQuestions(result);
+
+      // Add new questions to history
+      if (result && result.length > 0) {
+        setQuestionsHistory([...questionsHistory, ...result]);
+      }
     } catch (err) {
       setError(err as Error);
     } finally {
@@ -110,16 +139,6 @@ export default function useKahootGenerator() {
   };
 
   return {
-    locale,
-    topic,
-    setTopic,
-    numberOfQuestions,
-    setNumberOfQuestions,
-    customNumber,
-    setCustomNumber,
-    questions,
-    isLoading,
-    error,
     generateQuiz,
   };
 }

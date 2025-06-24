@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -19,42 +21,48 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { exportToExcel } from "@/lib/export-to-excel";
-import { QuizQuestion } from "@/lib/types";
-import { Download, Loader2, Sparkles } from "lucide-react";
+import { useQuestionsStore } from "@/stores/questions.store";
+import { Download, History, Loader2, Sparkles, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import useQuizForm from "./quiz-form.logic";
 
-interface QuizFormProps {
-  topic: string;
-  setTopic: (topic: string) => void;
-  numberOfQuestions: string;
-  setNumberOfQuestions: (num: string) => void;
-  customNumber: string;
-  setCustomNumber: (num: string) => void;
-  isLoading: boolean;
-  onGenerate: () => void;
-  questions: QuizQuestion[] | null;
-}
-
-export default function QuizForm({
-  topic,
-  setTopic,
-  numberOfQuestions,
-  setNumberOfQuestions,
-  customNumber,
-  setCustomNumber,
-  isLoading,
-  onGenerate,
-  questions,
-}: QuizFormProps) {
+export default function QuizForm() {
   const tForm = useTranslations("form");
   const tResults = useTranslations("results");
+  const logic = useQuizForm();
+
+  const {
+    topic,
+    numberOfQuestions,
+    customNumber,
+    questions,
+    questionsHistory,
+    useHistory,
+    setTopic,
+    setNumberOfQuestions,
+    setCustomNumber,
+    isLoading,
+    setUseHistory,
+    clearHistory,
+  } = useQuestionsStore();
 
   return (
     <Card className="w-full shadow-xl bg-white/80 backdrop-blur-sm pt-0">
       <CardHeader className="bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-t-xl p-4">
-        <CardTitle className="flex items-center space-x-2 text-xl">
-          <Sparkles className="size-6" />
-          <span>{tForm("createQuiz")}</span>
+        <CardTitle className="flex items-center justify-between text-xl">
+          <div className="flex items-center space-x-2">
+            <Sparkles className="size-6" />
+            <span>{tForm("createQuiz")}</span>
+          </div>
+          {useHistory && questionsHistory.length > 0 && (
+            <Badge
+              variant="secondary"
+              className="bg-white/20 text-white border-white/30"
+            >
+              <History className="h-3 w-3 mr-1" />
+              {tForm("contextActive")}: {questionsHistory.length}
+            </Badge>
+          )}
         </CardTitle>
         <CardDescription className="text-purple-100">
           {tForm("description")}
@@ -76,6 +84,41 @@ export default function QuizForm({
               onChange={(e) => setTopic(e.target.value)}
               className="min-h-[120px] text-lg border-2 border-gray-200 focus:border-purple-500 transition-colors"
             />
+          </div>
+
+          {/* History Controls */}
+          <div className="space-y-3 p-3 bg-gray-50 rounded-lg border">
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="useHistory"
+                checked={useHistory}
+                onCheckedChange={setUseHistory}
+                disabled={questionsHistory.length === 0}
+              />
+              <Label
+                htmlFor="useHistory"
+                className="text-sm font-medium cursor-pointer"
+              >
+                {tForm("useHistory")}
+                {questionsHistory.length > 0 && (
+                  <span className="text-gray-500 ml-1">
+                    ({questionsHistory.length} {tResults("questions")})
+                  </span>
+                )}
+              </Label>
+            </div>
+
+            {questionsHistory.length > 0 && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={clearHistory}
+                className="text-red-600 hover:text-red-700 hover:bg-red-50"
+              >
+                <Trash2 className="h-4 w-4 mr-2" />
+                {tForm("clearHistory")}
+              </Button>
+            )}
           </div>
 
           <div className="space-y-6">
@@ -137,7 +180,7 @@ export default function QuizForm({
 
             <div className="flex items-center gap-4">
               <Button
-                onClick={onGenerate}
+                onClick={logic.generateQuiz}
                 disabled={
                   !topic.trim() ||
                   isLoading ||
