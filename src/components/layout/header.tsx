@@ -40,9 +40,9 @@ export const Header = () => {
               <h1 className="md:text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                 {tHeader("title")}
               </h1>
-              <p className="text-xs md:text-sm text-gray-600">
+              <h2 className="text-xs md:text-sm text-gray-600">
                 {tHeader("subtitle")}
-              </p>
+              </h2>
             </div>
           </div>
 
