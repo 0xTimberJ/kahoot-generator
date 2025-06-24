@@ -36,7 +36,7 @@ export async function POST(req: Request) {
   try {
     // Validate that it's valid JSON
     const parsedJson = JSON.parse(cleanedText);
-    return Response.json({ text: cleanedText });
+    return Response.json({ questions: parsedJson });
   } catch (error) {
     console.error("Invalid JSON response:", error);
     return Response.json(

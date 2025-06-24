@@ -59,8 +59,9 @@ const generateQuizData = async (url: string, params: GenerateQuizParams) => {
   }
 
   try {
-    return JSON.parse(result.text);
+    return result.questions;
   } catch (error) {
+    console.log("error", error);
     // Clean the response by removing markdown code blocks
     let cleanedText = result.text.trim();
     if (cleanedText.startsWith("```json")) {
@@ -73,7 +74,8 @@ const generateQuizData = async (url: string, params: GenerateQuizParams) => {
 
     try {
       return JSON.parse(cleanedText);
-    } catch (e) {
+    } catch (error) {
+      console.log("error", error);
       // Last resort: try to extract JSON array from the text
       const jsonMatch = cleanedText.match(/\[[\s\S]*\]/);
       if (jsonMatch) {
