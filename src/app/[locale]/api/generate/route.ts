@@ -22,13 +22,14 @@ export async function POST(req: Request) {
     - Vary response times according to difficulty
     - Incorrect answers must be plausible
 
-    SPECIAL CASE - ADD MORE QUESTIONS:
-    When input contains keywords like "ajoute", "rajoute", "add", "more", "encore", "plus":
-    - Extract the topic from the previous questions context (ignore the add request text)
-    - Generate ONLY the requested number of NEW questions on that same topic  
-    - Make them complementary to existing questions (different aspects, harder/easier)
-    - Never duplicate existing questions
-    - Return ONLY the new questions, not the previous ones
+    CRITICAL RULE FOR ADDING QUESTIONS:
+    When user says "reprend les X d'avant et ajoute Y" or "garde les X et ajoute Y" or similar:
+    - If context contains previous questions, return ALL questions (previous + new)
+    - Total questions = number specified in TARGET
+    - If TARGET is 10 and context has 5, generate 5 NEW complementary questions
+    - Return array with ALL 10 questions (5 existing + 5 new)
+    - Never duplicate questions
+    - Keep existing questions EXACTLY as they are
     
     Required JSON format:
     [

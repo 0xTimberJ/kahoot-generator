@@ -82,7 +82,7 @@ export default function QuizForm() {
               placeholder={tForm("topicPlaceholder")}
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
-              className="min-h-[120px] text-lg border-2 border-gray-200 focus:border-purple-500 transition-colors"
+              className="min-h-[120px] md:text-lg border-2 border-gray-200 focus:border-purple-500 transition-colors"
             />
           </div>
 
@@ -178,7 +178,7 @@ export default function QuizForm() {
               )}
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 flex-wrap">
               <Button
                 onClick={logic.generateQuiz}
                 disabled={
