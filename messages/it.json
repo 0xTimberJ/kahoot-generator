@@ -12,8 +12,8 @@
   "form": {
     "createQuiz": "Crea un Quiz",
     "description": "Descrivi il tuo argomento e lascia che l'IA generi le domande",
-    "topic": "Argomento del quiz",
-    "topicPlaceholder": "Es: Storia italiana, Scienze naturali, Cultura generale...",
+    "topic": "Argomento del quiz o domande esistenti",
+    "topicPlaceholder": "Es: Storia italiana O incolla le tue domande",
     "numberOfQuestions": "Numero di domande",
     "customNumber": "Numero personalizzato",
     "generateQuiz": "Genera Quiz",

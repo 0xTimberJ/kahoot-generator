@@ -12,8 +12,8 @@
   "form": {
     "createQuiz": "Create a Quiz",
     "description": "Describe your topic and let AI generate questions",
-    "topic": "Quiz topic",
-    "topicPlaceholder": "Ex: French History, Natural Sciences, General Knowledge...",
+    "topic": "Quiz topic or existing questions",
+    "topicPlaceholder": "Ex: French History OR paste your questions",
     "numberOfQuestions": "Number of questions",
     "customNumber": "Custom number",
     "generateQuiz": "Generate Quiz",

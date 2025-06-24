@@ -16,33 +16,22 @@ const languageMap: Record<string, string> = {
 const generateQuizData = async (url: string, params: GenerateQuizParams) => {
   const questionsCount = params.numberOfQuestions;
 
-  const prompt = `Generate a quiz with ${questionsCount} questions about "${
-    params.topic
-  }" in ${languageMap[params.locale] || "English"}. 
-  
-  Required format:
-  Question – max 120 chars
-  Answer 1 – max 75 chars
-  Answer 2 – max 75 chars
-  Answer 3 – max 75 chars
-  Answer 4 – max 75 chars
-  Time limit (sec) – 5, 10, 20, 30, 60, 90, 120, or 240 secs
-  Correct answer(s) – choose at least one (1, 2, 3, or 4)
-  
-  Provide the output as a JSON array of objects.
-  Example: [
-    {
-      "Question": "What film won the 2020 Oscar?",
-      "Answer 1": "Joker",
-      "Answer 2": "Once Upon a Time",
-      "Answer 3": "1917",
-      "Answer 4": "Parasite",
-      "Time limit (sec)": 20,
-      "Correct answer(s)": 4
-    }
-  ]
-  
-  Respond ONLY with JSON, no additional text.`;
+  const prompt = `Analyze the input and determine if it contains:
+1) A simple topic/subject to generate questions about
+2) Pre-formatted questions in tabular format that need to be converted to JSON
+
+Input: "${params.topic}"
+
+TARGET: ${questionsCount} questions in ${
+    languageMap[params.locale] || "English"
+  }
+
+IF INPUT IS A SIMPLE TOPIC:
+Generate ${questionsCount} quiz questions about the topic.
+
+IF INPUT CONTAINS TABULAR QUESTIONS:
+Convert the existing questions to JSON format. If there are fewer than ${questionsCount} questions, generate additional questions in the same style/subject to reach exactly ${questionsCount} questions.
+`;
 
   const response = await fetch(url, {
     method: "POST",
@@ -93,7 +82,6 @@ export default function useKahootGenerator() {
   const [numberOfQuestions, setNumberOfQuestions] = useState("5");
   const [customNumber, setCustomNumber] = useState("");
   const [questions, setQuestions] = useState<QuizQuestion[] | null>(null);
-  console.log("questions", questions);
   const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 

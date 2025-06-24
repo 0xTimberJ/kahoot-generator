@@ -11,15 +11,30 @@ export async function POST(req: Request) {
     system: `You are an expert in creating educational quizzes. You generate quiz questions in the exact JSON format requested.
     
     Important rules:
-    - Respond ONLY with valid JSON, no additional text
+    - Respond ONLY with valid JSON array, no additional text
+    - Respect character limits
     - Do not include any other text than the JSON
     - Do not include triple backticks ('''json) before or after the JSON
     - Give me only a Array of questions starting with [ and ending with ]
     - Respect exactly the requested format
     - Questions must be relevant and educational
-    - Only one correct answer per question
+    - Only one correct answer per question except if in the question the user ask for multiple answers
     - Vary response times according to difficulty
-    - Incorrect answers must be plausible`,
+    - Incorrect answers must be plausible
+    
+    Required JSON format:
+    [
+      {
+        "Question": "max 120 chars",
+        "Answer 1": "max 75 chars", 
+        "Answer 2": "max 75 chars",
+        "Answer 3": "max 75 chars", 
+        "Answer 4": "max 75 chars",
+        "Time limit (sec)": 5|10|20|30|60|90|120|240,
+        "Correct answer(s)": 1|2|3|4
+      }
+    ]
+    `,
     prompt,
   });
 

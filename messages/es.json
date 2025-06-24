@@ -12,8 +12,8 @@
   "form": {
     "createQuiz": "Crear un Quiz",
     "description": "Describe tu tema y deja que la IA genere preguntas",
-    "topic": "Tema del quiz",
-    "topicPlaceholder": "Ej: Historia de España, Ciencias naturales, Cultura general...",
+    "topic": "Tema del quiz o preguntas existentes",
+    "topicPlaceholder": "Ej: Historia de España O pega tus preguntas",
     "numberOfQuestions": "Número de preguntas",
     "customNumber": "Número personalizado",
     "generateQuiz": "Generar Quiz",

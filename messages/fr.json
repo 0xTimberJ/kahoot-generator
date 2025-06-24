@@ -12,8 +12,8 @@
   "form": {
     "createQuiz": "Créer un Quiz",
     "description": "Décrivez votre sujet et laissez l'IA générer des questions",
-    "topic": "Sujet du quiz",
-    "topicPlaceholder": "Ex: Histoire de France, Sciences naturelles, Culture générale...",
+    "topic": "Sujet du quiz ou questions existantes",
+    "topicPlaceholder": "Ex: Histoire de France OU collez vos questions",
     "numberOfQuestions": "Nombre de questions",
     "customNumber": "personnalisé",
     "generateQuiz": "Générer le Quiz",

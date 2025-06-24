@@ -12,8 +12,8 @@
   "form": {
     "createQuiz": "Quiz erstellen",
     "description": "Beschreibe dein Thema und lass die KI Fragen generieren",
-    "topic": "Quiz-Thema",
-    "topicPlaceholder": "z.B.: Deutsche Geschichte, Naturwissenschaften, Allgemeinwissen...",
+    "topic": "Quiz-Thema oder vorhandene Fragen",
+    "topicPlaceholder": "z.B.: Deutsche Geschichte ODER füge deine Fragen",
     "numberOfQuestions": "Anzahl der Fragen",
     "customNumber": "Benutzerdefinierte Anzahl",
     "generateQuiz": "Quiz generieren",
