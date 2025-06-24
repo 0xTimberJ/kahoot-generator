@@ -7,7 +7,8 @@
   },
   "header": {
     "title": "Kahoot Generator AI",
-    "subtitle": "Generate interactive quizzes with artificial intelligence"
+    "subtitle": "Generate interactive quizzes with artificial intelligence",
+    "keywords": "kahoot, quiz, artificial intelligence, quiz generation, quiz creation, interactive quiz, online quiz, free online quiz"
   },
   "form": {
     "createQuiz": "Create a Quiz",

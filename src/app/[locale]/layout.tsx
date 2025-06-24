@@ -1,21 +1,18 @@
 import "@/app/globals.css";
 import { Header } from "@/components/layout/header";
 import { routing } from "@/i18n/routing";
-import type { Metadata } from "next";
-import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { Locale, NextIntlClientProvider, hasLocale } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-export const metadata: Metadata = {
-  title: "Kahoot Generator AI",
-  description: "Generate interactive quizzes with artificial intelligence",
+import { ReactNode } from "react";
+
+type Props = {
+  children: ReactNode;
+  params: Promise<{ locale: Locale }>;
 };
 
-export default async function LocaleLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}) {
+export default async function LocaleLayout(props: Props) {
+  const { children, params } = props;
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {
     notFound();
@@ -33,4 +30,37 @@ export default async function LocaleLayout({
       </body>
     </html>
   );
+}
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata(props: Omit<Props, "children">) {
+  const { locale } = await props.params;
+
+  const t = await getTranslations({ locale, namespace: "header" });
+
+  return {
+    title: t("title"),
+    description: t("subtitle"),
+    keywords: t("keywords"),
+    openGraph: {
+      type: "website",
+      siteName: t("title"),
+      title: {
+        default: t("title"),
+        template: t("title"),
+      },
+      description: t("subtitle"),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: {
+        default: t("title"),
+        template: t("title"),
+      },
+      description: t("subtitle"),
+    },
+  };
 }
