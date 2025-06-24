@@ -1,0 +1,45 @@
+{
+  "notFound": {
+    "title": "404",
+    "subtitle": "Page non trouvée",
+    "description": "La ressource demandée n'a pas été trouvée",
+    "returnHome": "Retour à l'accueil"
+  },
+  "header": {
+    "title": "Kahoot Generator AI",
+    "subtitle": "Générez des quiz interactifs avec l'intelligence artificielle"
+  },
+  "form": {
+    "createQuiz": "Créer un Quiz",
+    "description": "Décrivez votre sujet et laissez l'IA générer des questions",
+    "topic": "Sujet du quiz",
+    "topicPlaceholder": "Ex: Histoire de France, Sciences naturelles, Culture générale...",
+    "numberOfQuestions": "Nombre de questions",
+    "customNumber": "personnalisé",
+    "generateQuiz": "Générer le Quiz",
+    "generating": "Génération en cours...",
+    "exportExcel": "Exporter en Excel"
+  },
+  "results": {
+    "quizGenerated": "Quiz généré",
+    "questions": "questions",
+    "subject": "Sujet",
+    "question": "Question",
+    "answer1": "Réponse 1",
+    "answer2": "Réponse 2",
+    "answer3": "Réponse 3",
+    "answer4": "Réponse 4",
+    "timeLimit": "Temps (sec)",
+    "correctAnswer": "Bonne réponse",
+    "noQuiz": "Aucun quiz généré",
+    "fillForm": "Remplissez le formulaire et cliquez sur \"Générer le Quiz\" pour commencer",
+    "aiGenerating": "L'IA génère vos questions..."
+  },
+  "languages": {
+    "en": "Anglais",
+    "fr": "Français",
+    "es": "Espagnol",
+    "de": "Allemand",
+    "it": "Italien"
+  }
+}
