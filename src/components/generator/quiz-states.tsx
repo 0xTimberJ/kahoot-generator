@@ -16,9 +16,7 @@ export function QuizLoadingState() {
           <h3 className="text-2xl font-semibold text-gray-800">
             {tResults("aiGenerating")}
           </h3>
-          <p className="text-gray-600">
-            L'IA travaille sur votre quiz personnalisé...
-          </p>
+          <p className="text-gray-600">{tResults("aiWorkingDescription")}</p>
         </div>
       </CardContent>
     </Card>
@@ -26,12 +24,13 @@ export function QuizLoadingState() {
 }
 
 export function QuizErrorState() {
+  const tResults = useTranslations("results");
+
   return (
     <Card className="shadow-xl bg-red-50 border-red-200 w-full">
       <CardContent className="p-8 text-center">
         <div className="text-red-600 text-lg">
-          Une erreur s'est produite lors de la génération du quiz. Veuillez
-          réessayer.
+          {tResults("errorGeneration")}
         </div>
       </CardContent>
     </Card>

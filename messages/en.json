@@ -33,7 +33,12 @@
     "correctAnswer": "Correct Answer",
     "noQuiz": "No quiz generated",
     "fillForm": "Fill out the form and click \"Generate Quiz\" to start",
-    "aiGenerating": "AI is generating your questions..."
+    "aiGenerating": "AI is generating your questions...",
+    "questionsGenerated": "Questions generated",
+    "gameMinutes": "Game minutes",
+    "quizLanguage": "Quiz language",
+    "aiWorkingDescription": "AI is working on your personalized quiz...",
+    "errorGeneration": "An error occurred while generating the quiz. Please try again."
   },
   "languages": {
     "en": "English",

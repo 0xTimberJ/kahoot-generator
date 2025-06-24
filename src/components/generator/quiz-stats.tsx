@@ -10,6 +10,7 @@ interface QuizStatsProps {
 
 export default function QuizStats({ questions, locale }: QuizStatsProps) {
   const tLanguages = useTranslations("languages");
+  const tResults = useTranslations("results");
 
   const totalTime = Math.round(
     questions.reduce((acc, q) => acc + q["Time limit (sec)"], 0) / 60
@@ -22,7 +23,7 @@ export default function QuizStats({ questions, locale }: QuizStatsProps) {
           <CheckCircle className="h-10 w-10" />
           <div>
             <p className="text-2xl font-bold">{questions.length}</p>
-            <p className="text-green-100">Questions générées</p>
+            <p className="text-green-100">{tResults("questionsGenerated")}</p>
           </div>
         </CardContent>
       </Card>
@@ -32,7 +33,7 @@ export default function QuizStats({ questions, locale }: QuizStatsProps) {
           <Clock className="h-10 w-10" />
           <div>
             <p className="text-2xl font-bold">{totalTime}</p>
-            <p className="text-blue-100">Minutes de jeu</p>
+            <p className="text-blue-100">{tResults("gameMinutes")}</p>
           </div>
         </CardContent>
       </Card>
@@ -42,7 +43,7 @@ export default function QuizStats({ questions, locale }: QuizStatsProps) {
           <Trophy className="h-10 w-10" />
           <div>
             <p className="text-2xl font-bold">{tLanguages(`${locale}`)}</p>
-            <p className="text-purple-100">Langue du quiz</p>
+            <p className="text-purple-100">{tResults("quizLanguage")}</p>
           </div>
         </CardContent>
       </Card>

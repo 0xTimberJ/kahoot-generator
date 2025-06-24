@@ -33,7 +33,12 @@
     "correctAnswer": "Richtige Antwort",
     "noQuiz": "Kein Quiz generiert",
     "fillForm": "Fülle das Formular aus und klicke auf \"Quiz generieren\", um zu beginnen",
-    "aiGenerating": "KI generiert deine Fragen..."
+    "aiGenerating": "KI generiert deine Fragen...",
+    "questionsGenerated": "Generierte Fragen",
+    "gameMinutes": "Spielminuten",
+    "quizLanguage": "Quiz-Sprache",
+    "aiWorkingDescription": "KI arbeitet an deinem personalisierten Quiz...",
+    "errorGeneration": "Bei der Generierung des Quiz ist ein Fehler aufgetreten. Bitte versuche es erneut."
   },
   "languages": {
     "en": "Englisch",
