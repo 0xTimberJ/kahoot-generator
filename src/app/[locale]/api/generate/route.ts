@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   console.log(prompt);
 
   const { text } = await generateText({
-    model: google("gemini-2.5-flash-preview-04-17"),
+    model: google("gemini-1.5-flash"),
     system: `You are an expert in creating educational quizzes. You generate quiz questions in the exact JSON format requested.
     
     Important rules:
